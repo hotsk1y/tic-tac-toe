@@ -1,0 +1,65 @@
+.menu{
+  align-self: flex-start;
+  justify-self: flex-start;
+}
+
+.game-wrapper{
+  height: 100vh;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.start-game__btn{
+  background-color: #462446;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  transition: all .1s ease;
+  font-weight: 300;
+}
+.start-game__btn:hover{
+  background-color: #fff;
+  color: #462446;
+  font-weight: 500;
+}
+
+.field__info{
+  margin-top: 25px;
+}
+
+.score{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  width: 300px;
+  border: 2px solid #fff;
+  padding: 10px;
+}
+.score_descr{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.score_item{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.score_item div{
+  width: 100px;
+  display: flex;
+  justify-content: center;
+}
+.score_descr div{
+  width: 100px;
+  display: flex;
+  justify-content: center;
+}

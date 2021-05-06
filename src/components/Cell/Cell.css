@@ -1,0 +1,19 @@
+.cell{
+  width: 100px;
+  height: 100px;
+  border: 1px solid #462446;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #462446;
+  font-size: 60px;
+  font-weight: 900;
+  transition: all .2s ease;
+}
+
+.cell:hover{
+  cursor: pointer;
+  background-color: rgb(235, 235, 235);  
+}
