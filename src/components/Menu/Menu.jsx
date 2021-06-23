@@ -11,9 +11,12 @@ import {
 } from '../../store/reducers/settingsReducer'
 
 import { resetScoreAction } from '../../store/reducers/scoreReducer'
+import { startNewGameAction } from '../../store/reducers/fieldReducer'
 
-const Menu = () => {
+const Menu = ({ disabledInput }) => {
   const dispatch = useDispatch()
+
+  const turn = useSelector((state) => state.settings.turn)
 
   const isAgainstTheComputer = useSelector(
     (state) => state.settings.isAgainstTheComputer
@@ -33,21 +36,18 @@ const Menu = () => {
   const setxIsRun = (payload) => {
     dispatch(setxIsRunAction(payload))
   }
-
-  const turn = useSelector((state) => state.settings.turn)
   const setTurn = (payload) => {
     dispatch(setTurnAction(payload))
   }
 
-  let disabledInput = false
-  if (turn.length >= 1) {
-    disabledInput = true
-  } else {
-    disabledInput = false
-  }
-
   const resetScore = () => {
     dispatch(resetScoreAction())
+  }
+
+  const startNewGame = () => {
+    setxIsRun(xIsRunMenu)
+    setTurn([])
+    dispatch(startNewGameAction())
   }
 
   return (
@@ -77,6 +77,7 @@ const Menu = () => {
               setIsAgainstTheComputer(e.target.checked)
               setTurn([])
               resetScore()
+              startNewGame()
             }}
           />
         </div>
@@ -93,6 +94,7 @@ const Menu = () => {
               setxIsRun(e.target.checked)
               resetScore()
             }}
+            onClick={() => (turn.length === 1 ? startNewGame() : null)}
           />
         </div>
       </div>

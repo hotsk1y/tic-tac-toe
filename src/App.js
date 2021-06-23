@@ -15,6 +15,22 @@ function App() {
     dispatch(setMenuActiveAction(payload))
   }
 
+  const turn = useSelector((state) => state.settings.turn)
+  const xIsRun = useSelector((state) => state.settings.xIsRun)
+  const isAgainstTheComputer = useSelector(
+    (state) => state.settings.isAgainstTheComputer
+  )
+
+  let disabledInput = false
+  if (turn.length >= 1) {
+    disabledInput = true
+  } else {
+    disabledInput = false
+  }
+  if (turn.length === 1 && isAgainstTheComputer && !xIsRun) {
+    disabledInput = false
+  }
+
   return (
     <div className="main-page">
       <div
@@ -27,9 +43,9 @@ function App() {
         />
       </div>
       <div className={menuActive ? 'main-menu active' : 'main-menu'}>
-        <Menu />
+        <Menu disabledInput={disabledInput} />
       </div>
-      <Game />
+      <Game disabledInput={disabledInput} />
     </div>
   )
 }
