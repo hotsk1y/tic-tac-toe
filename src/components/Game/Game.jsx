@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react'
+<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux'
+=======
+import { useSelector } from 'react-redux'
+>>>>>>> 28db3ea45c963e7b5aabb3fcb43d2d8e9a14927f
 import './Game.css'
 import Field from '../Field/Field'
 
@@ -7,6 +11,72 @@ import {
   startNewGameAction,
   changeFieldAction,
 } from '../../store/reducers/fieldReducer'
+<<<<<<< HEAD
+=======
+
+const Game = ({
+  dispatch,
+  isAgainstTheComputer,
+  xIsRunMenu,
+  xIsRun,
+  setxIsRun,
+  turn,
+  setTurn,
+  setScoreX,
+  setScoreO,
+  setScoreDraw,
+  scoreX,
+  scoreO,
+  scoreDraw,
+}) => {
+  const field = useSelector((state) => state.field.field)
+  const startNewGame = () => {
+    setxIsRun(xIsRunMenu)
+    setTurn([])
+    dispatch(startNewGameAction())
+  }
+  const setField = (player, index) => {
+    dispatch(changeFieldAction(player, index))
+  }
+
+  let aiPlayer,
+    humanPlayer = undefined
+
+  if (xIsRun) {
+    aiPlayer = 'O'
+    humanPlayer = 'X'
+  } else {
+    aiPlayer = 'X'
+    humanPlayer = 'O'
+  }
+
+  let fieldWithIndex = [...field]
+  for (let i = 0; i < fieldWithIndex.length; i++) {
+    if (fieldWithIndex[i] === null) {
+      fieldWithIndex[i] = i
+    }
+  }
+
+  const checkWinner = (board, player) => {
+    if (
+      (board[0] === player && board[1] === player && board[2] === player) ||
+      (board[3] === player && board[4] === player && board[5] === player) ||
+      (board[6] === player && board[7] === player && board[8] === player) ||
+      (board[0] === player && board[3] === player && board[6] === player) ||
+      (board[1] === player && board[4] === player && board[7] === player) ||
+      (board[2] === player && board[5] === player && board[8] === player) ||
+      (board[0] === player && board[4] === player && board[8] === player) ||
+      (board[2] === player && board[4] === player && board[6] === player)
+    ) {
+      return true
+    }
+    return false
+  }
+
+  const findEmptyCells = (board) => {
+    return board.filter((s) => s != 'O' && s != 'X')
+  }
+>>>>>>> 28db3ea45c963e7b5aabb3fcb43d2d8e9a14927f
 
 import {
   setTurnAction,
