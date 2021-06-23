@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './Menu.css'
 
-<<<<<<< HEAD
 import {
   setIsAgainstTheComputerAction,
   setMenuActiveAction,
@@ -51,19 +50,6 @@ const Menu = () => {
     dispatch(resetScoreAction())
   }
 
-=======
-const Menu = ({
-  disabledInput,
-  setMenuActive,
-  isAgainstTheComputer,
-  setIsAgainstTheComputer,
-  xIsRunMenu,
-  setxIsRunMenu,
-  setxIsRun,
-  setTurn,
-  resetScore,
-}) => {
->>>>>>> 28db3ea45c963e7b5aabb3fcb43d2d8e9a14927f
   return (
     <div className="menu">
       <div className="close-menu__btn" onClick={() => setMenuActive(false)}>
