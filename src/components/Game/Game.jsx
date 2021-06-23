@@ -19,7 +19,7 @@ import {
   setScoreOAction,
 } from '../../store/reducers/scoreReducer'
 
-const Game = ({ disabledInput }) => {
+const Game = () => {
   const dispatch = useDispatch()
 
   const xIsRunMenu = useSelector((state) => state.settings.xIsRunMenu)

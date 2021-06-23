@@ -13,7 +13,7 @@ import {
 import { resetScoreAction } from '../../store/reducers/scoreReducer'
 import { startNewGameAction } from '../../store/reducers/fieldReducer'
 
-const Menu = ({ disabledInput }) => {
+const Menu = () => {
   const dispatch = useDispatch()
 
   const turn = useSelector((state) => state.settings.turn)
@@ -48,6 +48,18 @@ const Menu = ({ disabledInput }) => {
     setxIsRun(xIsRunMenu)
     setTurn([])
     dispatch(startNewGameAction())
+  }
+
+  const xIsRun = useSelector((state) => state.settings.xIsRun)
+
+  let disabledInput = false
+  if (turn.length >= 1) {
+    disabledInput = true
+  } else {
+    disabledInput = false
+  }
+  if (turn.length === 1 && isAgainstTheComputer && !xIsRun) {
+    disabledInput = false
   }
 
   return (
