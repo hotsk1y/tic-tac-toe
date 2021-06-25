@@ -16,11 +16,8 @@ import { startNewGameAction } from '../../store/reducers/fieldReducer'
 const Menu = () => {
   const dispatch = useDispatch()
 
-  const turn = useSelector((state) => state.settings.turn)
+  const { turn, isAgainstTheComputer } = useSelector((state) => state.settings)
 
-  const isAgainstTheComputer = useSelector(
-    (state) => state.settings.isAgainstTheComputer
-  )
   const setIsAgainstTheComputer = (payload) => {
     dispatch(setIsAgainstTheComputerAction(payload))
   }
@@ -62,6 +59,18 @@ const Menu = () => {
     disabledInput = false
   }
 
+  const handleComputerTurnClick = (e) => {
+    setIsAgainstTheComputer(e.target.checked)
+    setTurn([])
+    resetScore()
+    startNewGame()
+  }
+  const handleXIsRunClick = (e) => {
+    setxIsRunMenu(e.target.checked)
+    setxIsRun(e.target.checked)
+    resetScore()
+  }
+
   return (
     <div className="menu">
       <div className="close-menu__btn" onClick={() => setMenuActive(false)}>
@@ -71,13 +80,13 @@ const Menu = () => {
         <div className="title">
           <h1>Tic Tac Toe Settings</h1>
         </div>
-        {disabledInput ? (
+
+        {disabledInput && (
           <div className="apply-changes">
             Please, start a new game to change the settings
           </div>
-        ) : (
-          <></>
         )}
+        
         <div className="content-item chekbox-content__item">
           <label htmlFor="computerTurn">Player VS Bot: </label>
           <input
@@ -85,12 +94,7 @@ const Menu = () => {
             type="checkbox"
             disabled={disabledInput}
             checked={isAgainstTheComputer}
-            onChange={(e) => {
-              setIsAgainstTheComputer(e.target.checked)
-              setTurn([])
-              resetScore()
-              startNewGame()
-            }}
+            onChange={handleComputerTurnClick}
           />
         </div>
         <div className="content-item chekbox-content__item">
@@ -101,11 +105,7 @@ const Menu = () => {
             type="checkbox"
             disabled={disabledInput}
             checked={xIsRunMenu}
-            onChange={(e) => {
-              setxIsRunMenu(e.target.checked)
-              setxIsRun(e.target.checked)
-              resetScore()
-            }}
+            onChange={handleXIsRunClick}
             onClick={() => (turn.length === 1 ? startNewGame() : null)}
           />
         </div>

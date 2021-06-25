@@ -19,6 +19,9 @@ import {
   setScoreOAction,
 } from '../../store/reducers/scoreReducer'
 
+import { checkWinner } from '../../healper'
+import { runSymbolO, runSymbolX } from '../../constants'
+
 const Game = () => {
   const dispatch = useDispatch()
 
@@ -61,17 +64,17 @@ const Game = () => {
   const scoreO = useSelector((state) => state.score.scoreO)
   const setScoreO = () => {
     dispatch(setScoreOAction())
-  }
+  }  
 
   let aiPlayer,
     humanPlayer = undefined
 
   if (xIsRun) {
-    aiPlayer = 'O'
-    humanPlayer = 'X'
+    aiPlayer = runSymbolO
+    humanPlayer = runSymbolX
   } else {
-    aiPlayer = 'X'
-    humanPlayer = 'O'
+    aiPlayer = runSymbolX
+    humanPlayer = runSymbolO
   }
 
   let fieldWithIndex = [...field]
@@ -81,24 +84,8 @@ const Game = () => {
     }
   }
 
-  const checkWinner = (board, player) => {
-    if (
-      (board[0] === player && board[1] === player && board[2] === player) ||
-      (board[3] === player && board[4] === player && board[5] === player) ||
-      (board[6] === player && board[7] === player && board[8] === player) ||
-      (board[0] === player && board[3] === player && board[6] === player) ||
-      (board[1] === player && board[4] === player && board[7] === player) ||
-      (board[2] === player && board[5] === player && board[8] === player) ||
-      (board[0] === player && board[4] === player && board[8] === player) ||
-      (board[2] === player && board[4] === player && board[6] === player)
-    ) {
-      return true
-    }
-    return false
-  }
-
   const findEmptyCells = (board) => {
-    return board.filter((s) => s != 'O' && s != 'X')
+    return board.filter((s) => s != runSymbolO && s != runSymbolX)
   }
 
   let winner = null
@@ -120,9 +107,9 @@ const Game = () => {
   }
 
   const changeTheScore = () => {
-    if (winner === 'X') {
+    if (winner === runSymbolX) {
       setScoreX()
-    } else if (winner === 'O') {
+    } else if (winner === runSymbolO) {
       setScoreO()
     }
     if (turn.length === 9 && !winner) {
@@ -141,7 +128,7 @@ const Game = () => {
       return null
     }
     // X ? Y
-    let player = xIsRun ? 'X' : 'O'
+    let player = xIsRun ? runSymbolX : runSymbolO
     // update state
     setField(player, index)
     setxIsRun(!xIsRun)
@@ -165,7 +152,7 @@ const Game = () => {
     let bestMove = searchAlgorithm(fieldWithIndex, aiPlayer)
     if (winner || fieldCopy[bestMove.idx]) return null
 
-    fieldCopy[bestMove.idx] = !xIsRun ? 'X' : 'O'
+    fieldCopy[bestMove.idx] = !xIsRun ? runSymbolX : runSymbolO
     setField(aiPlayer, bestMove.idx)
     newTurn.push(fieldCopy[bestMove.idx])
     setTurn(newTurn)
@@ -177,7 +164,7 @@ const Game = () => {
     // ?game-over, ?click
     if (winner || fieldCopy[index]) return null
     // X ? Y
-    fieldCopy[index] = xIsRun ? 'X' : 'O'
+    fieldCopy[index] = xIsRun ? runSymbolX : runSymbolO
     setField(humanPlayer, index)
     newTurn.push(fieldCopy[index])
     setTurn(newTurn)
@@ -268,7 +255,7 @@ const Game = () => {
           ? `${winner} is the winner!`
           : turn.length === 9
             ? 'Draw!'
-            : `Your turn: ${xIsRun ? 'X' : 'O'}`}
+            : `Your turn: ${xIsRun ? runSymbolX : runSymbolO}`}
       </p>
     </div>
   )
