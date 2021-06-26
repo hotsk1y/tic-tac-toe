@@ -1,5 +1,5 @@
 const defaultScoreState = {
-  draw: 0,
+  scoreDraw: 0,
   scoreX: 0,
   scoreO: 0,
 }
@@ -16,9 +16,9 @@ export const scoreReducer = (state = defaultScoreState, action) => {
   case ADD_O:
     return { ...state, scoreO: state.scoreO + 1 }
   case ADD_DRAW:
-    return { ...state, draw: state.draw + 1 }
+    return { ...state, scoreDraw: state.scoreDraw + 1 }
   case RESET_SCORE:
-    return { ...state, draw: (state.draw = 0), scoreX: 0, scoreO: 0 }
+    return { ...state, scoreDraw: (state.scoreDraw = 0), scoreX: 0, scoreO: 0 }
 
   default:
     return state

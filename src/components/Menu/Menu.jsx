@@ -16,7 +16,7 @@ import { startNewGameAction } from '../../store/reducers/fieldReducer'
 const Menu = () => {
   const dispatch = useDispatch()
 
-  const { turn, isAgainstTheComputer } = useSelector((state) => state.settings)
+  const { turn, isAgainstTheComputer, xIsRun, xIsRunMenu } = useSelector((state) => state.settings)
 
   const setIsAgainstTheComputer = (payload) => {
     dispatch(setIsAgainstTheComputerAction(payload))
@@ -24,8 +24,7 @@ const Menu = () => {
   const setMenuActive = (payload) => {
     dispatch(setMenuActiveAction(payload))
   }
-
-  const xIsRunMenu = useSelector((state) => state.settings.xIsRunMenu)
+  
   const setxIsRunMenu = (payload) => {
     dispatch(setxIsRunMenuAction(payload))
   }
@@ -46,8 +45,6 @@ const Menu = () => {
     setTurn([])
     dispatch(startNewGameAction())
   }
-
-  const xIsRun = useSelector((state) => state.settings.xIsRun)
 
   let disabledInput = false
   if (turn.length >= 1) {

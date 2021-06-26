@@ -25,14 +25,12 @@ import { runSymbolO, runSymbolX } from '../../constants'
 const Game = () => {
   const dispatch = useDispatch()
 
-  const xIsRunMenu = useSelector((state) => state.settings.xIsRunMenu)
+  const {xIsRunMenu, xIsRun, turn, isAgainstTheComputer} = useSelector((state) => state.settings)
 
-  const xIsRun = useSelector((state) => state.settings.xIsRun)
   const setxIsRun = (payload) => {
     dispatch(setxIsRunAction(payload))
   }
 
-  const turn = useSelector((state) => state.settings.turn)
   const setTurn = (payload) => {
     dispatch(setTurnAction(payload))
   }
@@ -47,21 +45,13 @@ const Game = () => {
     dispatch(changeFieldAction(player, index))
   }
 
-  const isAgainstTheComputer = useSelector(
-    (state) => state.settings.isAgainstTheComputer
-  )
-
-  const scoreDraw = useSelector((state) => state.score.draw)
+  const {scoreDraw, scoreX, scoreO} = useSelector((state) => state.score)
   const setScoreDraw = () => {
     dispatch(setScoreDrawAction())
   }
-
-  const scoreX = useSelector((state) => state.score.scoreX)
   const setScoreX = () => {
     dispatch(setScoreXAction())
   }
-
-  const scoreO = useSelector((state) => state.score.scoreO)
   const setScoreO = () => {
     dispatch(setScoreOAction())
   }  
